@@ -1,0 +1,31 @@
+{
+  "search": {
+    "market": "Miami",
+    "max_price": 3000000,
+    "property_types": ["land", "single_family", "multifamily"],
+    "neighborhoods": [
+      "Little River Miami FL",
+      "El Portal Miami FL",
+      "Miami Shores FL",
+      "Biscayne Park FL",
+      "Little Haiti Miami FL",
+      "Buena Vista Miami FL",
+      "Liberty City Miami FL",
+      "Overtown Miami FL",
+      "Wynwood Miami FL",
+      "Wynwood Norte Miami FL",
+      "Little Havana Miami FL"
+    ]
+  },
+  "schedule": {
+    "run_at": "06:00",
+    "timezone": "America/New_York"
+  },
+  "notes": {
+    "property_types": "Options: land, single_family, multifamily. Remove any you don't want.",
+    "neighborhoods": "Add or remove neighborhoods here. Format: 'Neighborhood City ST'",
+    "max_price": "Max listing price in dollars. No commas.",
+    "run_at": "What time the scraper runs each morning. 24hr format.",
+    "adding_new_neighborhoods": "Just add a new line in the neighborhoods list the same way the others are written."
+  }
+}
