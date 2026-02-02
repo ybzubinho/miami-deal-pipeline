@@ -336,21 +336,30 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/deals.json":
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            with open(DEALS_PATH, "rb") as f:
-                self.wfile.write(f.read())
-        elif self.path == "/health":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"OK")
-        else:
-            self.send_response(404)
-            self.end_headers()
+    if self.path == "/":
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"OK")
+        return
+
+    elif self.path == "/deals.json":
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        with open(DEALS_PATH, "rb") as f:
+            self.wfile.write(f.read())
+
+    elif self.path == "/health":
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+    else:
+        self.send_response(404)
+        self.end_headers()
 
     def log_message(self, format, *args):
         pass  # suppress default logging
