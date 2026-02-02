@@ -369,15 +369,11 @@ def start_server():
     server.serve_forever()
 
 if __name__ == "__main__":
-    try:
-        main()
-        start_server()
-    except Exception as e:
-        print(f"\n{'='*50}")
-        print(f"FATAL ERROR:")
-        print(f"{'='*50}")
-        print(f"{type(e).__name__}: {e}")
-        import traceback
-        traceback.print_exc()
-        print(f"{'='*50}\n")
-        raise
+    import threading
+
+    threading.Thread(target=start_server, daemon=True).start()
+    main()
+
+    while True:
+        time.sleep(60)
+
