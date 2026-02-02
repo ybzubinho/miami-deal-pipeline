@@ -362,5 +362,4 @@ def start_server():
     server.serve_forever()
 
 if __name__ == "__main__":
-    main()
     start_server()
