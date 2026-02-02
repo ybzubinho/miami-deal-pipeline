@@ -248,6 +248,7 @@ export default function App() {
           id: 10000 + i,
           name: d.address || "Unknown",
           address: d.address || "",
+          is_new: d.is_new === true,
           zip: (d.address || "").match(/\d{5}/)?.[0] || "",
           lotSqFt: d.lotSize || null,
           zone: d.zoning || null,
