@@ -343,6 +343,13 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             with open(DEALS_PATH, "rb") as f:
                 self.wfile.write(f.read())
+              
+        elif self.path == "/":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"Miami Deal Pipeline is running. Try /deals.json")
+
         elif self.path == "/health":
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
