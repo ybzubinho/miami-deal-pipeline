@@ -330,32 +330,21 @@ def main():
     print(f"\n{'━'*50}\n")
 
 # ---- HTTP SERVER ----
-# Serves deals.json and keeps Railway container alive
-
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import os
 
-DEALS_PATH = "deals.json"  # make sure this file exists
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DEALS_PATH = os.path.join(SCRIPT_DIR, "deals.json")
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # Root (Railway / browser)
-        if self.path == "/":
+        if self.path in ["/", "/health"]:
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
             self.end_headers()
             self.wfile.write(b"OK")
             return
 
-        # Health check
-        if self.path == "/health":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"OK")
-            return
-
-        # Serve deals.json
         if self.path == "/deals.json":
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -365,12 +354,11 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write(f.read())
             return
 
-        # Anything else
         self.send_response(404)
         self.end_headers()
 
     def log_message(self, format, *args):
-        pass  # silence logs
+        pass
 
 
 def start_server():
@@ -382,3 +370,4 @@ def start_server():
 
 if __name__ == "__main__":
     start_server()
+
