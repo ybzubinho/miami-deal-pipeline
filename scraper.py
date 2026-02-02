@@ -329,45 +329,5 @@ def main():
         print(f"  ✓ Price updates logged: {', '.join(price_updates[:5])}" + ("..." if len(price_updates) > 5 else ""))
     print(f"\n{'━'*50}\n")
 
-# ---- HTTP SERVER ----
-from http.server import HTTPServer, BaseHTTPRequestHandler
-import os
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DEALS_PATH = os.path.join(SCRIPT_DIR, "deals.json")
-
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        if self.path in ["/", "/health"]:
-            self.send_response(200)
-            self.send_header("Content-Type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"OK")
-            return
-
-        if self.path == "/deals.json":
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            with open(DEALS_PATH, "rb") as f:
-                self.wfile.write(f.read())
-            return
-
-        self.send_response(404)
-        self.end_headers()
-
-    def log_message(self, format, *args):
-        pass
-
-
-def start_server():
-    port = int(os.environ.get("PORT", 8000))
-    server = HTTPServer(("0.0.0.0", port), Handler)
-    print(f"Server running on port {port}")
-    server.serve_forever()
-
-
-if __name__ == "__main__":
-    start_server()
 
