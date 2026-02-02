@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 /* ─── CONFIG ───────────────────────────────────────────────────── */
 // After deploying to Railway, go to your service → Settings → Domains
 // and paste your Railway URL here (e.g. https://miami-deal-pipeline.up.railway.app)
-const RAILWAY_URL = "https://miami-deal-pipeline.up.railway.app";
+const RAILWAY_URL = "https://miami-deal-pipeline-production.up.railway.app";
 
 /* ─── HARDCODED DEALS (your manually curated ones — always kept) ─ */
 const CURATED_DEALS = [
